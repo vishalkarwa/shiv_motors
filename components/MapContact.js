@@ -4,7 +4,7 @@
  */
 
 import { useState } from 'react';
-import { FaPhone, FaWhatsapp, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
+import { FaPhone, FaWhatsapp, FaMapMarkerAlt, FaClock, FaInstagram } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 import { CONTACT_LINKS, SITE_DETAILS } from '../lib/siteDetails';
 
@@ -178,6 +178,21 @@ export default function MapContact() {
               </div>
 
               <div className="flex items-start gap-3">
+                <FaInstagram className="text-brand-orange mt-1 flex-shrink-0" />
+                <div>
+                  <p className="text-white font-medium text-sm">Instagram</p>
+                  <a
+                    href={CONTACT_LINKS.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 text-sm hover:text-brand-orange transition-colors"
+                  >
+                    @shiv_motors_chitawa
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
                 <FaWhatsapp className="text-brand-orange mt-1 flex-shrink-0" />
                 <div>
                   <p className="text-white font-medium text-sm">Manager</p>
@@ -210,7 +225,7 @@ export default function MapContact() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <a
                 href={CONTACT_LINKS.ownerCall}
                 className="flex items-center justify-center gap-2 py-3 rounded-xl
@@ -228,6 +243,16 @@ export default function MapContact() {
                            hover:bg-[#20BD5C] transition-all duration-300"
               >
                 <FaWhatsapp /> WhatsApp
+              </a>
+              <a
+                href={CONTACT_LINKS.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 py-3 rounded-xl
+                           bg-gradient-to-r from-[#D62976] via-[#F77737] to-[#FCAF45] text-white font-condensed tracking-wider uppercase
+                           hover:opacity-90 transition-all duration-300"
+              >
+                <FaInstagram /> Instagram
               </a>
             </div>
           </div>

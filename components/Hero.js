@@ -8,6 +8,7 @@ import {
   FaArrowRight,
   FaCalendarAlt,
   FaChevronDown,
+  FaInstagram,
   FaMapMarkerAlt,
   FaPhone,
   FaPlay,
@@ -82,7 +83,7 @@ export default function Hero() {
               Call us directly, message on WhatsApp, or book your service online.
             </p>
 
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
               <Link
                 href="/booking"
                 className="btn-orange inline-flex items-center justify-center gap-3 text-base font-bold"
@@ -108,6 +109,16 @@ export default function Hero() {
               >
                 <FaWhatsapp />
                 WhatsApp
+              </a>
+
+              <a
+                href={CONTACT_LINKS.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-3 rounded-full border border-pink-500/50 px-6 py-3 font-condensed text-base uppercase tracking-[0.16em] text-gray-200 transition-all duration-300 hover:border-pink-400 hover:bg-pink-500/10 hover:text-pink-300"
+              >
+                <FaInstagram />
+                Instagram
               </a>
             </div>
 
