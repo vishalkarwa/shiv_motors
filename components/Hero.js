@@ -73,8 +73,6 @@ export default function Hero() {
               SHIV
               <br />
               <span className="text-brand-orange">MOTORS</span>
-              <br />
-              <span className="text-white/90">CHITAWA</span>
             </h1>
 
             <p className="mt-6 max-w-xl text-base leading-relaxed text-gray-300 sm:text-lg">
