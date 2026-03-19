@@ -62,7 +62,7 @@ export default function Hero() {
           <div className="max-w-2xl">
             <div className="mb-6 flex flex-wrap items-center gap-3">
               <span className="eyebrow-track">
-                Signature Workshop Experience
+                Local Workshop In Chitawa
               </span>
               <div className="panel-luxe inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs text-gray-300">
                 <WorkshopStatus showNextOpen={false} />
@@ -70,16 +70,16 @@ export default function Hero() {
             </div>
 
             <h1 className="hero-title-glow font-display text-6xl leading-[0.92] text-white sm:text-7xl lg:text-[7.5rem] xl:text-[8.5rem]">
-              BEST LOOKING
+              SHIV
               <br />
-              <span className="text-brand-orange">WORKSHOP SITE</span>
+              <span className="text-brand-orange">MOTORS</span>
               <br />
-              <span className="text-white/90">IN THE AREA</span>
+              <span className="text-white/90">CHITAWA</span>
             </h1>
 
             <p className="mt-6 max-w-xl text-base leading-relaxed text-gray-300 sm:text-lg">
-              Shiv Motors blends direct owner contact, real workshop media, and fast booking into a
-              homepage that feels premium before a customer even makes the first call.
+              Vehicle repair, washing, tyre work, AC service, and general maintenance in Chitawa.
+              Call us directly, message on WhatsApp, or book your service online.
             </p>
 
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
@@ -152,14 +152,14 @@ export default function Hero() {
                   <div className="absolute inset-x-0 bottom-0 p-5 sm:p-7">
                     <div className="mb-3 flex items-center gap-1.5 text-[0.72rem] uppercase tracking-[0.28em] text-brand-orange">
                       <FaWrench />
-                      Customer-first workshop design
+                      Real workshop. Real people.
                     </div>
                     <h2 className="font-display text-4xl leading-none text-white sm:text-5xl">
-                      PREMIUM FIRST IMPRESSION.
+                      SEE THE PLACE BEFORE YOU VISIT.
                     </h2>
                     <p className="mt-3 max-w-md text-sm leading-relaxed text-gray-300 sm:text-base">
-                      A bold hero, real photography, and direct contact cues make the website feel
-                      as trustworthy as the workshop itself.
+                      Photos, walkthrough video, and direct owner contact make it easy to know who
+                      you are calling and where your vehicle is going.
                     </p>
                   </div>
                 </div>
@@ -172,10 +172,10 @@ export default function Hero() {
                   ))}
                 </div>
                 <p className="font-condensed text-xs uppercase tracking-[0.24em] text-brand-orange">
-                  Visual Trust
+                  No Stock Photos
                 </p>
                 <p className="mt-2 text-sm leading-relaxed text-gray-300">
-                  Real photos, real workshop, real owner presence. No stock-template feeling.
+                  Real workshop photos and real contact details make the website feel genuine.
                 </p>
               </div>
 
