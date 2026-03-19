@@ -30,4 +30,4 @@ yarn-error.log*
 
 # Local backups / malformed temp folders
 .next.bak.*/
-{pages/
+[[]pages/
