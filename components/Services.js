@@ -1,181 +1,250 @@
 /**
  * components/Services.js
- * Responsive grid of service cards with hover effects.
+ * Editorial service grid with stronger visual hierarchy and reveal animation.
  */
 
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
+import {
+  FaArrowRight,
+  FaCarBattery,
+  FaCarSide,
+  FaClipboardCheck,
+  FaCrosshairs,
+  FaDotCircle,
+  FaOilCan,
+  FaShieldAlt,
+  FaSnowflake,
+  FaTools,
+} from 'react-icons/fa';
 
 const services = [
   {
-    icon: '🔧',
+    icon: FaTools,
     title: 'Engine Repair',
-    desc: 'Complete engine diagnostics, overhaul, and rebuild by certified mechanics.',
-    price: 'Starting ₹2,500',
+    desc: 'Complete diagnostics, overhaul support, and performance correction for engines that need careful hands.',
+    price: 'Starting Rs 2,500',
     badge: 'Most Popular',
+    meta: 'Powertrain',
   },
   {
-    icon: '🛢️',
+    icon: FaOilCan,
     title: 'Oil Change',
-    desc: 'Full synthetic & semi-synthetic oil change with filter replacement.',
-    price: 'Starting ₹699',
-    badge: null,
+    desc: 'Synthetic and semi-synthetic oil service with filter replacement and clean, quick turnaround.',
+    price: 'Starting Rs 699',
+    badge: 'Quick Job',
+    meta: 'Maintenance',
   },
   {
-    icon: '🚗',
+    icon: FaCarSide,
     title: 'Full Car Wash',
-    desc: 'Interior + exterior deep clean, polish, and wax for showroom-ready results.',
-    price: 'Starting ₹499',
+    desc: 'Interior and exterior cleanup designed to make the vehicle feel freshly handed over.',
+    price: 'Starting Rs 499',
     badge: null,
+    meta: 'Detailing',
   },
   {
-    icon: '🛞',
+    icon: FaDotCircle,
     title: 'Tyre Service',
-    desc: 'Tyre rotation, balancing, puncture repair, and replacement for all vehicle types.',
-    price: 'Starting ₹199',
+    desc: 'Balancing, rotation, puncture work, and tyre health checks for daily driving confidence.',
+    price: 'Starting Rs 199',
     badge: null,
+    meta: 'Road Grip',
   },
   {
-    icon: '❄️',
+    icon: FaSnowflake,
     title: 'AC Service',
-    desc: 'Gas refilling, leak detection, compressor check, and cabin filter replacement.',
-    price: 'Starting ₹1,200',
-    badge: 'Summer Special',
+    desc: 'Cooling performance checks, gas refilling, leak tracing, and cabin comfort restoration.',
+    price: 'Starting Rs 1,200',
+    badge: 'Summer Favorite',
+    meta: 'Cabin Comfort',
   },
   {
-    icon: '🔴',
+    icon: FaShieldAlt,
     title: 'Brake Service',
-    desc: 'Brake pad/disc inspection, replacement, and hydraulic system flush.',
-    price: 'Starting ₹899',
+    desc: 'Brake inspection, pad replacement, and safety-first checks before the vehicle leaves the bay.',
+    price: 'Starting Rs 899',
     badge: null,
+    meta: 'Safety',
   },
   {
-    icon: '🔋',
+    icon: FaCarBattery,
     title: 'Battery Service',
-    desc: 'Battery testing, jump-start, and genuine battery replacement.',
-    price: 'Starting ₹1,500',
+    desc: 'Battery testing, jump-start help, and replacement options when starting power drops.',
+    price: 'Starting Rs 1,500',
     badge: null,
+    meta: 'Electrical',
   },
   {
-    icon: '⚙️',
+    icon: FaCrosshairs,
     title: 'Wheel Alignment',
-    desc: '4-wheel computerised alignment and suspension geometry correction.',
-    price: 'Starting ₹599',
+    desc: 'Precision alignment to improve control, tyre life, and long-drive confidence.',
+    price: 'Starting Rs 599',
     badge: null,
+    meta: 'Precision',
   },
   {
-    icon: '🔍',
+    icon: FaClipboardCheck,
     title: 'General Service',
-    desc: 'Comprehensive 35-point vehicle inspection and preventive maintenance.',
-    price: 'Starting ₹1,999',
+    desc: 'A full inspection and preventive service flow for customers who want a complete once-over.',
+    price: 'Starting Rs 1,999',
     badge: 'Recommended',
+    meta: 'Inspection',
   },
 ];
 
-function ServiceCard({ service, index }) {
+const experiencePillars = [
+  {
+    title: 'Owner Presence',
+    desc: 'Customers feel the difference when answers come directly from the workshop.',
+  },
+  {
+    title: 'Fast Booking Flow',
+    desc: 'Strong CTA placement turns curiosity into calls and appointments quickly.',
+  },
+  {
+    title: 'Visual Proof',
+    desc: 'Real imagery makes the service feel trustworthy before the first visit.',
+  },
+];
+
+function ServiceCard({ service }) {
+  const Icon = service.icon;
+
   return (
-    <div
-      className="group relative glass-card rounded-2xl p-6 
-                 hover:border-brand-orange/40 hover:shadow-orange-sm
-                 transition-all duration-300 hover:-translate-y-1 cursor-pointer"
-      style={{ animationDelay: `${index * 0.08}s` }}
-    >
-      {/* Badge */}
-      {service.badge && (
-        <span className="absolute top-4 right-4 text-xs bg-brand-orange text-white 
-                         px-2 py-0.5 rounded-full font-condensed tracking-wide">
-          {service.badge}
-        </span>
-      )}
+    <article className="reveal group panel-luxe relative overflow-hidden rounded-[1.75rem] p-6">
+      <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-r from-brand-orange/18 via-brand-orange/6 to-transparent" />
+      <div className="absolute -right-10 top-10 h-28 w-28 rounded-full bg-brand-orange/10 blur-2xl transition-transform duration-500 group-hover:scale-125" />
 
-      {/* Icon */}
-      <div className="w-14 h-14 bg-brand-orange/10 border border-brand-orange/20 
-                      rounded-xl flex items-center justify-center text-3xl mb-4
-                      group-hover:bg-brand-orange/20 group-hover:border-brand-orange/40 
-                      transition-all duration-300">
-        {service.icon}
+      <div className="relative z-10">
+        <div className="mb-6 flex items-start justify-between gap-4">
+          <div>
+            <p className="font-condensed text-[0.72rem] uppercase tracking-[0.28em] text-brand-orange">
+              {service.meta}
+            </p>
+            <h3 className="mt-2 font-display text-[1.9rem] leading-none text-white">
+              {service.title}
+            </h3>
+          </div>
+
+          <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-brand-orange/25 bg-brand-orange/10 text-brand-orange transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-105">
+            <Icon size={22} />
+          </div>
+        </div>
+
+        <p className="min-h-[72px] text-sm leading-relaxed text-gray-400">
+          {service.desc}
+        </p>
+
+        <div className="mt-6 flex items-center justify-between gap-4">
+          <div>
+            <p className="text-[0.72rem] uppercase tracking-[0.24em] text-gray-500">
+              Service Starting
+            </p>
+            <p className="mt-1 font-condensed text-lg uppercase tracking-[0.14em] text-brand-orange">
+              {service.price}
+            </p>
+          </div>
+
+          <Link
+            href={`/booking?service=${encodeURIComponent(service.title)}`}
+            className="inline-flex items-center gap-2 rounded-full border border-[#2A3550] px-4 py-2 text-xs font-condensed uppercase tracking-[0.18em] text-gray-300 transition-all duration-300 group-hover:border-brand-orange group-hover:text-brand-orange"
+          >
+            Book Now
+            <FaArrowRight size={10} />
+          </Link>
+        </div>
+
+        {service.badge ? (
+          <span className="mt-5 inline-flex rounded-full border border-brand-orange/25 bg-brand-orange/12 px-3 py-1 text-[0.68rem] font-condensed uppercase tracking-[0.24em] text-brand-orange">
+            {service.badge}
+          </span>
+        ) : null}
       </div>
-
-      {/* Title */}
-      <h3 className="font-display text-xl text-white tracking-wide mb-2">
-        {service.title}
-      </h3>
-
-      {/* Desc */}
-      <p className="text-gray-400 text-sm leading-relaxed mb-4">
-        {service.desc}
-      </p>
-
-      {/* Price + CTA */}
-      <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <span className="text-brand-orange font-condensed text-sm tracking-wide">
-          {service.price}
-        </span>
-        <Link
-          href={`/booking?service=${encodeURIComponent(service.title)}`}
-          className="text-xs text-gray-400 border border-[#2A3550] px-3 py-1.5 rounded-full
-                     group-hover:border-brand-orange group-hover:text-brand-orange 
-                     transition-all duration-300 font-condensed tracking-wide"
-        >
-          Book →
-        </Link>
-      </div>
-
-      {/* Bottom accent line */}
-      <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r 
-                      from-brand-orange to-brand-amber rounded-full
-                      group-hover:w-full transition-all duration-500" />
-    </div>
+    </article>
   );
 }
 
 export default function Services() {
   const sectionRef = useRef(null);
 
-  // Scroll-reveal animation using IntersectionObserver
   useEffect(() => {
     const cards = sectionRef.current?.querySelectorAll('.reveal');
     const observer = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add('visible')),
-      { threshold: 0.1 }
+      (entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add('visible')),
+      { threshold: 0.12 }
     );
+
     cards?.forEach((card) => observer.observe(card));
     return () => observer.disconnect();
   }, []);
 
   return (
-    <section id="services" ref={sectionRef} className="py-24 bg-[#0A0F1A]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section header */}
-        <div className="text-center mb-16 reveal">
-          <p className="font-condensed text-brand-orange tracking-[0.3em] uppercase text-sm mb-3">
+    <section id="services" ref={sectionRef} className="section-shell relative overflow-hidden bg-[#0A0F1A] py-24">
+      <div className="absolute left-0 top-20 h-64 w-64 rounded-full bg-brand-orange/10 blur-3xl" />
+      <div className="absolute right-0 top-40 h-80 w-80 rounded-full bg-brand-amber/10 blur-3xl" />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="reveal mb-16 text-center">
+          <p className="font-condensed text-sm uppercase tracking-[0.3em] text-brand-orange">
             What We Offer
           </p>
-          <h2 className="section-title text-5xl sm:text-6xl text-white mb-4">
-            OUR SERVICES
+          <h2 className="section-title mt-3 text-5xl text-white sm:text-6xl">
+            SERVICES THAT LOOK AS PREMIUM AS THEY FEEL
           </h2>
-          <p className="text-gray-400 max-w-xl mx-auto text-base">
-            Expert auto care for every need. All services performed by certified 
-            mechanics using quality parts and the latest equipment.
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-gray-400">
+            Customers should feel a strong first impression here, then immediately understand what
+            the workshop can do. This section is built to sell confidence, clarity, and action.
           </p>
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service, i) => (
-            <div key={service.title} className="reveal" style={{ transitionDelay: `${i * 0.05}s` }}>
-              <ServiceCard service={service} index={i} />
+        <div className="mb-10 grid gap-4 sm:grid-cols-3">
+          {experiencePillars.map((pillar, index) => (
+            <div
+              key={pillar.title}
+              className="reveal panel-luxe rounded-[1.5rem] p-5"
+              style={{ transitionDelay: `${index * 0.08}s` }}
+            >
+              <p className="font-condensed text-[0.72rem] uppercase tracking-[0.28em] text-brand-orange">
+                Signature Cue
+              </p>
+              <h3 className="mt-2 text-xl font-medium text-white">{pillar.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-gray-400">{pillar.desc}</p>
             </div>
           ))}
         </div>
 
-        {/* Bottom CTA */}
-        <div className="text-center mt-12 reveal px-2">
-          <p className="text-gray-400 mb-4">Not sure what your vehicle needs?</p>
-          <Link href="/booking" className="btn-orange inline-flex items-center gap-2">
-            Book a Free Inspection
-          </Link>
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+          {services.map((service, index) => (
+            <div
+              key={service.title}
+              style={{ transitionDelay: `${index * 0.05}s` }}
+            >
+              <ServiceCard service={service} />
+            </div>
+          ))}
+        </div>
+
+        <div className="reveal mt-12">
+          <div className="panel-luxe flex flex-col items-start justify-between gap-5 rounded-[2rem] px-6 py-6 sm:px-8 lg:flex-row lg:items-center">
+            <div>
+              <p className="font-condensed text-[0.72rem] uppercase tracking-[0.28em] text-brand-orange">
+                Need a recommendation?
+              </p>
+              <h3 className="mt-2 font-display text-3xl text-white sm:text-4xl">
+                BOOK A FREE INSPECTION FIRST.
+              </h3>
+              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-gray-400 sm:text-base">
+                If the customer is unsure, the page should still feel easy. A premium UI works best
+                when the next step is obvious and low-friction.
+              </p>
+            </div>
+
+            <Link href="/booking" className="btn-orange inline-flex items-center gap-3 whitespace-nowrap">
+              Start Booking
+              <FaArrowRight size={12} />
+            </Link>
+          </div>
         </div>
       </div>
     </section>

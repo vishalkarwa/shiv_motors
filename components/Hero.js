@@ -1,153 +1,219 @@
 /**
  * components/Hero.js
- * Full-screen hero with animated headline, workshop status badge,
- * call-to-action buttons, and a decorative background.
+ * Cinematic hero with media collage, trust cues, and primary booking actions.
  */
 
 import Link from 'next/link';
-import { FaPhone, FaCalendarAlt, FaChevronDown, FaWrench } from 'react-icons/fa';
+import {
+  FaArrowRight,
+  FaCalendarAlt,
+  FaChevronDown,
+  FaMapMarkerAlt,
+  FaPhone,
+  FaPlay,
+  FaStar,
+  FaWhatsapp,
+  FaWrench,
+} from 'react-icons/fa';
 import WorkshopStatus from './WorkshopStatus';
-import { CONTACT_LINKS, SITE_DETAILS } from '../lib/siteDetails';
+import { CONTACT_LINKS, GALLERY_IMAGES, GALLERY_VIDEOS, SITE_DETAILS } from '../lib/siteDetails';
+
+const trustNotes = [
+  'Owner-led communication',
+  'Real workshop photos',
+  'WhatsApp-first support',
+  'Same-day inspection feel',
+];
+
+const highlightCards = [
+  { value: SITE_DETAILS.foundedDate, label: 'Established' },
+  { value: SITE_DETAILS.owner.name, label: 'Owner-Led' },
+  { value: '11+ Media', label: 'Real Workshop Views' },
+];
 
 export default function Hero() {
   const scrollToServices = () => {
     document.querySelector('#services')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const highlights = [
-    { value: SITE_DETAILS.foundedDate, label: 'Workshop Started' },
-    { value: SITE_DETAILS.owner.name, label: 'Owner' },
-    { value: SITE_DETAILS.manager.name, label: 'Manager' },
-  ];
-
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{ background: 'linear-gradient(135deg, var(--hero-start) 0%, var(--hero-mid) 60%, var(--hero-end) 100%)' }}
+      className="section-shell noise-overlay relative min-h-screen overflow-hidden bg-hero-gradient"
     >
       <div
-        className="absolute inset-0 opacity-[0.04]"
+        className="absolute inset-0 opacity-[0.07]"
         style={{
           backgroundImage: `
-            linear-gradient(rgba(249,115,22,0.8) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(249,115,22,0.8) 1px, transparent 1px)
+            radial-gradient(circle at 20% 20%, rgba(249,115,22,0.24), transparent 28%),
+            radial-gradient(circle at 82% 22%, rgba(251,146,60,0.12), transparent 24%),
+            linear-gradient(rgba(249,115,22,0.08) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(249,115,22,0.08) 1px, transparent 1px)
           `,
-          backgroundSize: '60px 60px',
+          backgroundSize: 'auto, auto, 72px 72px, 72px 72px',
         }}
       />
 
-      <div
-        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2
-                   w-[140vw] h-[90vw] max-w-[800px] max-h-[600px] rounded-full pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse, rgba(249,115,22,0.08) 0%, transparent 70%)' }}
-      />
+      <div className="absolute left-[-10rem] top-24 h-80 w-80 rounded-full bg-brand-orange/10 blur-3xl" />
+      <div className="absolute right-[-8rem] top-1/3 h-72 w-72 rounded-full bg-brand-amber/10 blur-3xl" />
 
-      <div
-        className="absolute right-0 top-0 w-1/2 h-full opacity-5"
-        style={{
-          background: 'linear-gradient(135deg, transparent 40%, #F97316 100%)',
-          clipPath: 'polygon(30% 0, 100% 0, 100% 100%, 60% 100%)',
-        }}
-      />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
-        <div className="flex flex-col lg:flex-row items-center gap-10 sm:gap-12 lg:gap-16">
-          <div className="flex-1 text-center lg:text-left">
-            <div className="flex justify-center lg:justify-start mb-6">
-              <WorkshopStatus />
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.02fr_0.98fr]">
+          <div className="max-w-2xl">
+            <div className="mb-6 flex flex-wrap items-center gap-3">
+              <span className="eyebrow-track">
+                Signature Workshop Experience
+              </span>
+              <div className="panel-luxe inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs text-gray-300">
+                <WorkshopStatus showNextOpen={false} />
+              </div>
             </div>
 
-            <h1 className="font-display text-5xl sm:text-7xl lg:text-8xl xl:text-9xl text-white leading-none mb-4 animate-slide-up">
-              SHIV
+            <h1 className="hero-title-glow font-display text-6xl leading-[0.92] text-white sm:text-7xl lg:text-[7.5rem] xl:text-[8.5rem]">
+              BEST LOOKING
               <br />
-              <span className="text-brand-orange" style={{ textShadow: '0 0 40px rgba(249,115,22,0.4)' }}>
-                MOTORS
-              </span>
+              <span className="text-brand-orange">WORKSHOP SITE</span>
+              <br />
+              <span className="text-white/90">IN THE AREA</span>
             </h1>
 
-            <p
-              className="font-condensed text-xl sm:text-2xl text-gray-400 tracking-widest uppercase mb-6 animate-fade-in"
-              style={{ animationDelay: '0.2s' }}
-            >
-              {SITE_DETAILS.tagline}
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-gray-300 sm:text-lg">
+              Shiv Motors blends direct owner contact, real workshop media, and fast booking into a
+              homepage that feels premium before a customer even makes the first call.
             </p>
 
-            <p
-              className="text-gray-300 text-base sm:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0 mb-8 animate-fade-in"
-              style={{ animationDelay: '0.4s' }}
-            >
-              Honest vehicle repair and maintenance for drivers in {SITE_DETAILS.location.full}. Started on{' '}
-              {SITE_DETAILS.foundedDate}, Shiv Motors is led by owner {SITE_DETAILS.owner.name} and
-              manager {SITE_DETAILS.manager.name}.
-            </p>
-
-            <div
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in"
-              style={{ animationDelay: '0.6s' }}
-            >
-              <Link href="/booking" className="flex items-center justify-center gap-2 btn-orange text-base font-bold w-full sm:w-auto">
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+              <Link
+                href="/booking"
+                className="btn-orange inline-flex items-center justify-center gap-3 text-base font-bold"
+              >
                 <FaCalendarAlt />
-                Book Service
+                Book Service Now
+                <FaArrowRight className="text-sm" />
               </Link>
+
               <a
                 href={CONTACT_LINKS.ownerCall}
-                className="flex items-center justify-center gap-2 px-6 py-3 rounded-full border w-full sm:w-auto
-                           border-brand-orange text-brand-orange font-condensed
-                           tracking-wider uppercase text-base
-                           hover:bg-brand-orange/10 transition-all duration-300"
+                className="inline-flex items-center justify-center gap-3 rounded-full border border-brand-orange/60 px-6 py-3 font-condensed text-base uppercase tracking-[0.16em] text-brand-orange transition-all duration-300 hover:bg-brand-orange/10 hover:shadow-orange"
               >
                 <FaPhone />
                 Call Owner
               </a>
+
+              <a
+                href={CONTACT_LINKS.ownerWhatsApp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-3 rounded-full border border-[#2A3550] px-6 py-3 font-condensed text-base uppercase tracking-[0.16em] text-gray-200 transition-all duration-300 hover:border-[#25D366] hover:text-[#25D366]"
+              >
+                <FaWhatsapp />
+                WhatsApp
+              </a>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-10 sm:mt-12">
-              {highlights.map((stat) => (
-                <div key={stat.label} className="glass-card rounded-xl p-4 text-center">
-                  <p className="font-display text-lg sm:text-xl text-brand-orange">{stat.value}</p>
-                  <p className="text-gray-500 text-xs uppercase tracking-[0.25em] mt-1">{stat.label}</p>
+            <div className="mt-10 grid gap-4 sm:grid-cols-3">
+              {highlightCards.map((item) => (
+                <div key={item.label} className="panel-luxe rounded-[1.35rem] px-5 py-4">
+                  <p className="font-display text-2xl tracking-wide text-brand-orange sm:text-3xl">
+                    {item.value}
+                  </p>
+                  <p className="mt-1 text-xs uppercase tracking-[0.24em] text-gray-400">
+                    {item.label}
+                  </p>
                 </div>
+              ))}
+            </div>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              {trustNotes.map((note) => (
+                <span key={note} className="hero-chip">
+                  {note}
+                </span>
               ))}
             </div>
           </div>
 
-          <div className="flex-1 flex justify-center lg:justify-end">
-            <div className="relative w-full max-w-md">
-              <div className="glass-card rounded-2xl p-6 sm:p-8 shadow-card animate-float">
-                <div className="text-center mb-6">
-                  <div className="w-20 h-20 bg-brand-orange/10 border-2 border-brand-orange rounded-full flex items-center justify-center mx-auto mb-4">
-                    <FaWrench className="text-brand-orange text-4xl" />
+          <div className="relative flex justify-center lg:justify-end">
+            <div className="relative w-full max-w-[36rem]">
+              <div className="panel-luxe group relative overflow-hidden rounded-[2rem] p-3 shadow-card sm:p-4">
+                <div className="image-sheen relative aspect-[4/5] overflow-hidden rounded-[1.55rem]">
+                  <img
+                    src={GALLERY_IMAGES[6].src}
+                    alt="Shiv Motors workshop exterior"
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#070C15] via-[#070C15]/30 to-transparent" />
+
+                  <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-black/55 px-3 py-1.5 text-xs font-condensed uppercase tracking-[0.24em] text-white sm:left-6 sm:top-6">
+                    <FaMapMarkerAlt className="text-brand-orange" />
+                    Real Workshop View
                   </div>
-                  <h3 className="font-display text-2xl text-white">Local Vehicle Care</h3>
-                  <p className="text-gray-400 text-sm mt-1">{SITE_DETAILS.location.full}</p>
-                </div>
 
-                <div className="flex flex-wrap gap-2 justify-center">
-                  {['Engine Repair', 'Oil Change', 'Tyre Service', 'AC Service', 'Brake Service', 'Full Wash', 'Wheel Align'].map((service) => (
-                    <span
-                      key={service}
-                      className="text-xs bg-brand-orange/10 border border-brand-orange/30
-                                 text-brand-orange px-3 py-1 rounded-full font-condensed tracking-wide"
-                    >
-                      {service}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="mt-6 flex items-center justify-center gap-2">
-                  <div className="h-2 w-2 rounded-full bg-brand-orange" />
-                  <span className="text-gray-300 text-sm">{SITE_DETAILS.tagline}</span>
+                  <div className="absolute inset-x-0 bottom-0 p-5 sm:p-7">
+                    <div className="mb-3 flex items-center gap-1.5 text-[0.72rem] uppercase tracking-[0.28em] text-brand-orange">
+                      <FaWrench />
+                      Customer-first workshop design
+                    </div>
+                    <h2 className="font-display text-4xl leading-none text-white sm:text-5xl">
+                      PREMIUM FIRST IMPRESSION.
+                    </h2>
+                    <p className="mt-3 max-w-md text-sm leading-relaxed text-gray-300 sm:text-base">
+                      A bold hero, real photography, and direct contact cues make the website feel
+                      as trustworthy as the workshop itself.
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              <div
-                className="absolute -top-3 -right-2 sm:-top-4 sm:-right-4 bg-brand-orange text-white
-                           rounded-full w-16 h-16 sm:w-20 sm:h-20 flex flex-col items-center
-                           justify-center shadow-orange text-center animate-pulse-slow"
-              >
-                <span className="font-display text-lg sm:text-xl leading-none">Best</span>
-                <span className="text-[10px] sm:text-xs">In Area</span>
+              <div className="panel-luxe absolute left-0 top-8 hidden w-52 -translate-x-12 rounded-[1.5rem] p-4 sm:block float-slow">
+                <div className="mb-3 flex items-center gap-1 text-yellow-400">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <FaStar key={star} size={11} />
+                  ))}
+                </div>
+                <p className="font-condensed text-xs uppercase tracking-[0.24em] text-brand-orange">
+                  Visual Trust
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-gray-300">
+                  Real photos, real workshop, real owner presence. No stock-template feeling.
+                </p>
+              </div>
+
+              <div className="panel-luxe absolute bottom-20 right-0 w-48 rounded-[1.5rem] p-3 sm:w-56 sm:p-4 drift">
+                <div className="flex items-center gap-3">
+                  <img
+                    src={SITE_DETAILS.owner.photo}
+                    alt={SITE_DETAILS.owner.name}
+                    className="h-14 w-14 rounded-2xl object-cover sm:h-16 sm:w-16"
+                  />
+                  <div>
+                    <p className="font-condensed text-[0.72rem] uppercase tracking-[0.24em] text-brand-orange">
+                      Owner-Led
+                    </p>
+                    <p className="text-sm font-medium text-white">{SITE_DETAILS.owner.name}</p>
+                    <p className="text-xs text-gray-400">Direct support from the workshop floor.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="panel-luxe absolute bottom-0 left-5 flex items-center gap-3 rounded-[1.35rem] p-3 sm:left-10 sm:p-4">
+                <div className="relative h-14 w-20 overflow-hidden rounded-xl border border-white/10">
+                  <img
+                    src={GALLERY_VIDEOS[0].poster}
+                    alt={GALLERY_VIDEOS[0].title}
+                    className="h-full w-full object-cover"
+                  />
+                  <span className="absolute inset-0 flex items-center justify-center bg-black/45 text-white">
+                    <FaPlay size={12} className="ml-0.5" />
+                  </span>
+                </div>
+                <div>
+                  <p className="font-condensed text-[0.72rem] uppercase tracking-[0.24em] text-brand-orange">
+                    Walkthrough Media
+                  </p>
+                  <p className="text-sm text-white">{GALLERY_VIDEOS[0].title}</p>
+                  <p className="text-xs text-gray-400">Video-backed confidence on first visit.</p>
+                </div>
               </div>
             </div>
           </div>
@@ -156,10 +222,15 @@ export default function Hero() {
 
       <button
         onClick={scrollToServices}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-gray-400 hover:text-brand-orange transition-colors animate-bounce"
+        className="absolute bottom-7 left-1/2 z-10 -translate-x-1/2 text-gray-400 transition-colors hover:text-brand-orange"
         aria-label="Scroll down"
       >
-        <FaChevronDown size={20} />
+        <div className="flex flex-col items-center gap-2">
+          <span className="font-condensed text-[0.68rem] uppercase tracking-[0.32em]">
+            Explore
+          </span>
+          <FaChevronDown size={18} className="animate-bounce" />
+        </div>
       </button>
     </section>
   );

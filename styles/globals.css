@@ -35,6 +35,11 @@
   --hero-mid: #111827;
   --hero-end: #1A1F2E;
   --map-filter: invert(90%) hue-rotate(180deg);
+  --panel-luxe-start: rgba(26, 34, 53, 0.92);
+  --panel-luxe-end: rgba(10, 15, 26, 0.96);
+  --shell-grid: rgba(255, 255, 255, 0.05);
+  --chip-bg: rgba(255, 255, 255, 0.04);
+  --chip-border: rgba(255, 255, 255, 0.08);
 }
 
 :root[data-theme='light'] {
@@ -56,6 +61,11 @@
   --hero-mid: #F3E8D6;
   --hero-end: #ECDDCA;
   --map-filter: none;
+  --panel-luxe-start: rgba(255, 255, 255, 0.88);
+  --panel-luxe-end: rgba(244, 233, 214, 0.96);
+  --shell-grid: rgba(120, 88, 45, 0.08);
+  --chip-bg: rgba(120, 88, 45, 0.06);
+  --chip-border: rgba(120, 88, 45, 0.12);
 }
 
 /* ── Base Reset ────────────────────────────────────────────────── */
@@ -98,6 +108,122 @@ body {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--glass-border);
+}
+
+.panel-luxe {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(155deg, var(--panel-luxe-start) 0%, var(--panel-luxe-end) 100%);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.panel-luxe::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(120deg, rgba(249, 115, 22, 0.14), transparent 30%),
+    linear-gradient(320deg, rgba(255, 255, 255, 0.06), transparent 34%);
+  pointer-events: none;
+}
+
+.section-shell {
+  position: relative;
+  isolation: isolate;
+}
+
+.section-shell::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--shell-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--shell-grid) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(to bottom, transparent, black 14%, black 86%, transparent);
+  pointer-events: none;
+  opacity: 0.14;
+}
+
+.hero-title-glow {
+  text-shadow:
+    0 0 24px rgba(249, 115, 22, 0.2),
+    0 0 80px rgba(249, 115, 22, 0.12);
+}
+
+.hero-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--chip-border);
+  background: var(--chip-bg);
+  padding: 0.72rem 1rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.76rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.hero-chip::before {
+  content: '';
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: var(--orange);
+  flex: 0 0 auto;
+}
+
+.eyebrow-track {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid rgba(249, 115, 22, 0.24);
+  background: rgba(249, 115, 22, 0.08);
+  padding: 0.72rem 1.05rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--orange-light);
+}
+
+.image-sheen {
+  position: relative;
+  isolation: isolate;
+}
+
+.image-sheen::after {
+  content: '';
+  position: absolute;
+  inset: -35%;
+  background: linear-gradient(
+    112deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.04) 44%,
+    rgba(255, 255, 255, 0.16) 50%,
+    rgba(255, 255, 255, 0.04) 56%,
+    transparent 70%
+  );
+  transform: translateX(-120%) rotate(18deg);
+  transition: transform 0.95s ease;
+  pointer-events: none;
+}
+
+.image-sheen:hover::after {
+  transform: translateX(120%) rotate(18deg);
+}
+
+.float-slow {
+  animation: floatSlow 8s ease-in-out infinite;
+}
+
+.drift {
+  animation: drift 11s ease-in-out infinite;
 }
 
 /* ── Orange glow button ────────────────────────────────────────── */
@@ -260,6 +386,26 @@ body {
   }
 }
 
+@keyframes floatSlow {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(10px, -10px, 0);
+  }
+}
+
 @media (max-width: 640px) {
   .marquee-track {
     animation-duration: 18s;
@@ -269,5 +415,23 @@ body {
     font-size: 0.72rem;
     letter-spacing: 0.18em;
     padding: 0.8rem 1rem;
+  }
+
+  .hero-chip,
+  .eyebrow-track {
+    letter-spacing: 0.18em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track,
+  .float-slow,
+  .drift,
+  .animate-bounce {
+    animation: none !important;
+  }
+
+  .image-sheen::after {
+    display: none;
   }
 }

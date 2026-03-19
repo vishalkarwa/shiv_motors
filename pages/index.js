@@ -7,6 +7,7 @@ import Head from 'next/head';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import MarqueeStrip from '../components/MarqueeStrip';
+import SignatureExperience from '../components/SignatureExperience';
 import Services from '../components/Services';
 import About from '../components/About';
 import Gallery from '../components/Gallery';
@@ -35,6 +36,7 @@ export default function Home() {
       <main>
         <Hero />
         <MarqueeStrip />
+        <SignatureExperience />
         <Services />
         <About />
         <Gallery />
