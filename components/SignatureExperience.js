@@ -160,14 +160,14 @@ export default function SignatureExperience() {
                 />
                 <div className="p-6">
                   <p className="font-condensed text-[0.72rem] uppercase tracking-[0.28em] text-brand-orange">
-                    Human Trust Layer
+                    Workshop Leadership
                   </p>
                   <h3 className="mt-2 font-display text-3xl text-white">
-                    PEOPLE TRUST PEOPLE.
+                    A FACE CUSTOMERS CAN REMEMBER.
                   </h3>
                   <p className="mt-3 text-sm leading-relaxed text-gray-400">
-                    Putting the owner front and center makes the workshop feel accountable. That one
-                    detail changes the entire tone of the website.
+                    Showing the person behind Shiv Motors makes the website feel grounded, personal,
+                    and far more credible than a generic business page.
                   </p>
                   <div className="mt-5">
                     <p className="text-white">{SITE_DETAILS.owner.name}</p>

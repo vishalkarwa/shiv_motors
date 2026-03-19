@@ -5,9 +5,7 @@
 
 import Link from 'next/link';
 import {
-  FaFacebook,
   FaInstagram,
-  FaYoutube,
   FaWhatsapp,
   FaPhone,
   FaMapMarkerAlt,
@@ -37,9 +35,7 @@ const serviceLinks = [
 
 export default function Footer() {
   const socials = [
-    { icon: <FaFacebook />, href: '#', label: 'Facebook' },
-    { icon: <FaInstagram />, href: '#', label: 'Instagram' },
-    { icon: <FaYoutube />, href: '#', label: 'YouTube' },
+    { icon: <FaInstagram />, href: CONTACT_LINKS.instagram, label: 'Instagram' },
     { icon: <FaWhatsapp />, href: CONTACT_LINKS.ownerWhatsApp, label: 'WhatsApp' },
   ];
 
