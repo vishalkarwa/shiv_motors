@@ -21,15 +21,17 @@ function PhotoCard({ item, onClick }) {
         loading="lazy"
       />
 
-      <div
-        className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent
+        <div
+          className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent
                    opacity-90 group-hover:opacity-100 transition-opacity duration-300
                    flex flex-col justify-end p-4"
       >
         <div className="flex items-center justify-between gap-3">
           <div>
-            <p className="text-white font-condensed text-sm tracking-[0.2em] uppercase">{item.label}</p>
-            <p className="text-gray-300 text-xs mt-1">{item.description}</p>
+            <p className="text-white font-condensed text-xs tracking-[0.18em] uppercase sm:text-sm sm:tracking-[0.2em]">
+              {item.label}
+            </p>
+            <p className="mt-1 hidden text-xs text-gray-300 sm:block">{item.description}</p>
           </div>
           <FaExpand className="text-white/80 flex-shrink-0" />
         </div>
@@ -72,11 +74,11 @@ export default function Gallery() {
   return (
     <section id="gallery" className="py-24 bg-[#0A0F1A]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <div className="text-center mb-14 sm:mb-16">
           <p className="font-condensed text-brand-orange tracking-[0.3em] uppercase text-sm mb-3">
             Workshop in Action
           </p>
-          <h2 className="section-title text-5xl sm:text-6xl text-white mb-4">OUR GALLERY</h2>
+          <h2 className="section-title text-4xl sm:text-6xl text-white mb-4">OUR GALLERY</h2>
           <p className="text-gray-400 max-w-2xl mx-auto text-base">
             Real photos and videos from Shiv Motors showing the workshop, equipment, service bays,
             vehicles, and daily work on site.
@@ -89,7 +91,7 @@ export default function Gallery() {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-4 md:grid-cols-3 xl:grid-cols-4">
           {GALLERY_IMAGES.map((item) => (
             <PhotoCard key={item.src} item={item} onClick={setSelected} />
           ))}

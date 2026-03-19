@@ -115,7 +115,7 @@ export default function About() {
             <p className="font-condensed text-brand-orange tracking-[0.3em] uppercase text-sm mb-3">
               Our Story
             </p>
-            <h2 className="section-title text-5xl sm:text-6xl text-white mb-6">
+            <h2 className="section-title mb-5 text-4xl text-white sm:mb-6 sm:text-6xl">
               ABOUT
               <br />
               <span className="text-brand-orange">SHIV MOTORS</span>
@@ -158,7 +158,7 @@ export default function About() {
           </div>
 
           <div className="space-y-8">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="grid grid-cols-3 gap-3 sm:gap-4">
               {stats.map((stat, index) => (
                 <div
                   key={stat.label}
@@ -167,8 +167,10 @@ export default function About() {
                   }`}
                   style={{ transitionDelay: `${index * 0.08}s` }}
                 >
-                  <p className="font-display text-3xl sm:text-4xl text-brand-orange">{stat.value}</p>
-                  <p className="text-gray-400 text-sm uppercase tracking-wider">{stat.label}</p>
+                  <p className="font-display text-[2rem] text-brand-orange sm:text-4xl">{stat.value}</p>
+                  <p className="text-[0.68rem] uppercase tracking-[0.18em] text-gray-400 sm:text-sm sm:tracking-wider">
+                    {stat.label}
+                  </p>
                 </div>
               ))}
             </div>
@@ -255,7 +257,7 @@ export default function About() {
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2.5 sm:gap-3">
               {badges.map((badge, index) => (
                 <span
                   key={badge}

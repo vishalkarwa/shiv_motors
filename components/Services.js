@@ -116,7 +116,7 @@ function ServiceCard({ service, index }) {
 
   return (
     <article
-      className={`reveal ${direction} group panel-luxe relative overflow-hidden rounded-[1.75rem] p-6`}
+      className={`reveal ${direction} group panel-luxe relative overflow-hidden rounded-[1.75rem] p-5 sm:p-6`}
       style={{ transitionDelay: `${index * 0.05}s` }}
     >
       <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-r from-brand-orange/18 via-brand-orange/6 to-transparent" />
@@ -128,7 +128,7 @@ function ServiceCard({ service, index }) {
             <p className="font-condensed text-[0.72rem] uppercase tracking-[0.28em] text-brand-orange">
               {service.meta}
             </p>
-            <h3 className="mt-2 font-display text-[1.9rem] leading-none text-white">
+            <h3 className="mt-2 font-display text-[1.65rem] leading-none text-white sm:text-[1.9rem]">
               {service.title}
             </h3>
           </div>
@@ -138,11 +138,11 @@ function ServiceCard({ service, index }) {
           </div>
         </div>
 
-        <p className="min-h-[72px] text-sm leading-relaxed text-gray-400">
+        <p className="text-sm leading-relaxed text-gray-400 sm:min-h-[72px]">
           {service.desc}
         </p>
 
-        <div className="mt-6 flex items-center justify-between gap-4">
+        <div className="mt-6 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="text-[0.72rem] uppercase tracking-[0.24em] text-gray-500">
               Service Starting
@@ -154,7 +154,7 @@ function ServiceCard({ service, index }) {
 
           <Link
             href={`/booking?service=${encodeURIComponent(service.title)}`}
-            className="inline-flex items-center gap-2 rounded-full border border-[#2A3550] px-4 py-2 text-xs font-condensed uppercase tracking-[0.18em] text-gray-300 transition-all duration-300 group-hover:border-brand-orange group-hover:text-brand-orange"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[#2A3550] px-4 py-2.5 text-xs font-condensed uppercase tracking-[0.18em] text-gray-300 transition-all duration-300 group-hover:border-brand-orange group-hover:text-brand-orange sm:w-auto"
           >
             Book Now
             <FaArrowRight size={10} />
@@ -181,11 +181,11 @@ export default function Services() {
       <div className="absolute right-0 top-40 h-80 w-80 rounded-full bg-brand-amber/10 blur-3xl" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="reveal reveal-down mb-16 text-center">
+        <div className="reveal reveal-down mb-14 text-center sm:mb-16">
           <p className="font-condensed text-sm uppercase tracking-[0.3em] text-brand-orange">
             What We Offer
           </p>
-          <h2 className="section-title mt-3 text-5xl text-white sm:text-6xl">
+          <h2 className="section-title mt-3 text-4xl text-white sm:text-6xl">
             SERVICES THAT LOOK AS PREMIUM AS THEY FEEL
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-gray-400">
@@ -212,7 +212,7 @@ export default function Services() {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 xl:grid-cols-3">
           {services.map((service, index) => (
             <ServiceCard key={service.title} service={service} index={index} />
           ))}
@@ -233,7 +233,7 @@ export default function Services() {
               </p>
             </div>
 
-            <Link href="/booking" className="btn-orange inline-flex items-center gap-3 whitespace-nowrap">
+            <Link href="/booking" className="btn-orange inline-flex w-full items-center justify-center gap-3 whitespace-nowrap lg:w-auto">
               Start Booking
               <FaArrowRight size={12} />
             </Link>

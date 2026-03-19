@@ -515,6 +515,11 @@ body {
 }
 
 @media (max-width: 640px) {
+  .section-shell::after {
+    background-size: 54px 54px;
+    opacity: 0.1;
+  }
+
   .marquee-track {
     animation-duration: 18s;
   }
@@ -528,6 +533,45 @@ body {
   .hero-chip,
   .eyebrow-track {
     letter-spacing: 0.18em;
+  }
+
+  .hero-chip {
+    padding: 0.62rem 0.88rem;
+    font-size: 0.69rem;
+  }
+
+  .eyebrow-track {
+    padding: 0.62rem 0.9rem;
+    font-size: 0.72rem;
+  }
+
+  .reveal {
+    filter: blur(5px);
+    transition-duration: 0.68s;
+  }
+
+  .reveal-left {
+    transform: translate3d(-30px, 0, 0) scale(0.99);
+  }
+
+  .reveal-right {
+    transform: translate3d(30px, 0, 0) scale(0.99);
+  }
+
+  .reveal-up {
+    transform: translate3d(0, 34px, 0) scale(0.99);
+  }
+
+  .reveal-down {
+    transform: translate3d(0, -34px, 0) scale(0.99);
+  }
+
+  .about-photo-left {
+    transform: translate3d(-38px, 28px, 0) rotate(-3deg) scale(0.97);
+  }
+
+  .about-photo-right {
+    transform: translate3d(38px, 28px, 0) rotate(3deg) scale(0.97);
   }
 }
 

@@ -62,21 +62,21 @@ export default function SignatureExperience() {
       <div className="absolute right-[-4rem] bottom-0 h-80 w-80 rounded-full bg-brand-amber/10 blur-3xl" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-12 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+        <div className="mb-10 flex flex-col gap-5 sm:mb-12 sm:gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="reveal reveal-left max-w-3xl">
             <p className="font-condensed text-sm uppercase tracking-[0.3em] text-brand-orange">
               Signature Experience
             </p>
-            <h2 className="section-title mt-3 text-5xl text-white sm:text-6xl">
+            <h2 className="section-title mt-3 text-4xl text-white sm:text-6xl">
               A HOME PAGE PEOPLE REMEMBER AFTER ONE SCROLL.
             </h2>
-            <p className="mt-4 text-base leading-relaxed text-gray-400">
+            <p className="mt-3 text-base leading-relaxed text-gray-400 sm:mt-4">
               This section is designed to feel less like a normal workshop site and more like a
               crafted brand experience. It gives visitors a reason to stay, explore, and trust.
             </p>
           </div>
 
-          <div className="reveal reveal-right panel-luxe max-w-md rounded-[1.6rem] px-5 py-4">
+          <div className="reveal reveal-right panel-luxe w-full max-w-md rounded-[1.6rem] px-5 py-4">
             <p className="font-condensed text-[0.72rem] uppercase tracking-[0.28em] text-brand-orange">
               Designed For Conversion
             </p>
@@ -93,7 +93,7 @@ export default function SignatureExperience() {
               <img
                 src={GALLERY_IMAGES[1].src}
                 alt="Service bay at Shiv Motors"
-                className="h-[30rem] w-full object-cover sm:h-[36rem]"
+                className="h-[24rem] w-full object-cover sm:h-[36rem]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#070C15] via-[#070C15]/30 to-transparent" />
 
@@ -102,11 +102,11 @@ export default function SignatureExperience() {
                 {SITE_DETAILS.location.area}
               </div>
 
-              <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
+              <div className="absolute inset-x-0 bottom-0 p-5 sm:p-8">
                 <p className="font-condensed text-[0.72rem] uppercase tracking-[0.28em] text-brand-orange">
                   From First Call To Final Key Handover
                 </p>
-                <h3 className="mt-3 font-display text-4xl leading-none text-white sm:text-5xl">
+                <h3 className="mt-3 font-display text-3xl leading-none text-white sm:text-5xl">
                   THE WORKSHOP SHOULD FEEL PREMIUM ONLINE TOO.
                 </h3>
                 <p className="mt-3 max-w-2xl text-sm leading-relaxed text-gray-300 sm:text-base">
@@ -114,11 +114,11 @@ export default function SignatureExperience() {
                   site the kind of presence that makes people say it looks custom-built.
                 </p>
 
-                <div className="mt-6 grid gap-3 sm:grid-cols-3">
+                <div className="mt-5 grid gap-3 sm:mt-6 sm:grid-cols-3">
                   {processSteps.map((item) => (
                     <div
                       key={item.step}
-                      className="rounded-[1.2rem] border border-white/10 bg-black/35 p-4 backdrop-blur-sm"
+                      className="rounded-[1.2rem] border border-white/10 bg-black/35 p-3.5 backdrop-blur-sm sm:p-4"
                     >
                       <p className="font-condensed text-[0.72rem] uppercase tracking-[0.28em] text-brand-orange">
                         Step {item.step}
@@ -133,7 +133,7 @@ export default function SignatureExperience() {
           </article>
 
           <div className="grid gap-6">
-            <div className="reveal reveal-right panel-luxe rounded-[2rem] p-6">
+            <div className="reveal reveal-right panel-luxe rounded-[2rem] p-5 sm:p-6">
               <p className="font-condensed text-[0.72rem] uppercase tracking-[0.28em] text-brand-orange">
                 Why This Feels Better
               </p>
@@ -142,7 +142,7 @@ export default function SignatureExperience() {
                   const Icon = item.icon;
 
                   return (
-                    <div key={item.title} className="flex gap-4 rounded-[1.25rem] border border-white/6 bg-white/[0.02] p-4">
+                    <div key={item.title} className="flex gap-3 rounded-[1.25rem] border border-white/6 bg-white/[0.02] p-4 sm:gap-4">
                       <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-brand-orange/10 text-brand-orange">
                         <Icon size={18} />
                       </div>
@@ -182,7 +182,7 @@ export default function SignatureExperience() {
               </div>
             </div>
 
-            <div className="reveal reveal-right panel-luxe rounded-[2rem] p-6">
+            <div className="reveal reveal-right panel-luxe rounded-[2rem] p-5 sm:p-6">
               <p className="font-condensed text-[0.72rem] uppercase tracking-[0.28em] text-brand-orange">
                 Ready To Turn Visitors Into Customers?
               </p>
@@ -191,7 +191,7 @@ export default function SignatureExperience() {
               </p>
 
               <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-                <Link href="/booking" className="btn-orange inline-flex items-center justify-center gap-3">
+                <Link href="/booking" className="btn-orange inline-flex w-full items-center justify-center gap-3 sm:w-auto">
                   Book Service
                   <FaArrowRight size={12} />
                 </Link>
@@ -199,7 +199,7 @@ export default function SignatureExperience() {
                   href={CONTACT_LINKS.ownerWhatsApp}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-3 rounded-full border border-[#2A3550] px-6 py-3 font-condensed uppercase tracking-[0.16em] text-gray-200 transition-colors hover:border-[#25D366] hover:text-[#25D366]"
+                  className="inline-flex w-full items-center justify-center gap-3 rounded-full border border-[#2A3550] px-6 py-3 font-condensed uppercase tracking-[0.16em] text-gray-200 transition-colors hover:border-[#25D366] hover:text-[#25D366] sm:w-auto"
                 >
                   <FaWhatsapp />
                   WhatsApp Owner
