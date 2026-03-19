@@ -4,7 +4,7 @@
  */
 
 import Link from 'next/link';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import {
   FaArrowRight,
   FaCarBattery,
@@ -17,6 +17,7 @@ import {
   FaSnowflake,
   FaTools,
 } from 'react-icons/fa';
+import useScrollReveal from './useScrollReveal';
 
 const services = [
   {
@@ -108,11 +109,16 @@ const experiencePillars = [
   },
 ];
 
-function ServiceCard({ service }) {
+function ServiceCard({ service, index }) {
   const Icon = service.icon;
+  const direction =
+    index % 3 === 0 ? 'reveal-left' : index % 3 === 1 ? 'reveal-up' : 'reveal-right';
 
   return (
-    <article className="reveal group panel-luxe relative overflow-hidden rounded-[1.75rem] p-6">
+    <article
+      className={`reveal ${direction} group panel-luxe relative overflow-hidden rounded-[1.75rem] p-6`}
+      style={{ transitionDelay: `${index * 0.05}s` }}
+    >
       <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-r from-brand-orange/18 via-brand-orange/6 to-transparent" />
       <div className="absolute -right-10 top-10 h-28 w-28 rounded-full bg-brand-orange/10 blur-2xl transition-transform duration-500 group-hover:scale-125" />
 
@@ -167,17 +173,7 @@ function ServiceCard({ service }) {
 
 export default function Services() {
   const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const cards = sectionRef.current?.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add('visible')),
-      { threshold: 0.12 }
-    );
-
-    cards?.forEach((card) => observer.observe(card));
-    return () => observer.disconnect();
-  }, []);
+  useScrollReveal(sectionRef, { threshold: 0.12 });
 
   return (
     <section id="services" ref={sectionRef} className="section-shell relative overflow-hidden bg-[#0A0F1A] py-24">
@@ -185,7 +181,7 @@ export default function Services() {
       <div className="absolute right-0 top-40 h-80 w-80 rounded-full bg-brand-amber/10 blur-3xl" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="reveal mb-16 text-center">
+        <div className="reveal reveal-down mb-16 text-center">
           <p className="font-condensed text-sm uppercase tracking-[0.3em] text-brand-orange">
             What We Offer
           </p>
@@ -202,7 +198,9 @@ export default function Services() {
           {experiencePillars.map((pillar, index) => (
             <div
               key={pillar.title}
-              className="reveal panel-luxe rounded-[1.5rem] p-5"
+              className={`reveal panel-luxe rounded-[1.5rem] p-5 ${
+                index % 3 === 0 ? 'reveal-left' : index % 3 === 1 ? 'reveal-up' : 'reveal-right'
+              }`}
               style={{ transitionDelay: `${index * 0.08}s` }}
             >
               <p className="font-condensed text-[0.72rem] uppercase tracking-[0.28em] text-brand-orange">
@@ -216,16 +214,11 @@ export default function Services() {
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
           {services.map((service, index) => (
-            <div
-              key={service.title}
-              style={{ transitionDelay: `${index * 0.05}s` }}
-            >
-              <ServiceCard service={service} />
-            </div>
+            <ServiceCard key={service.title} service={service} index={index} />
           ))}
         </div>
 
-        <div className="reveal mt-12">
+        <div className="reveal reveal-up mt-12">
           <div className="panel-luxe flex flex-col items-start justify-between gap-5 rounded-[2rem] px-6 py-6 sm:px-8 lg:flex-row lg:items-center">
             <div>
               <p className="font-condensed text-[0.72rem] uppercase tracking-[0.28em] text-brand-orange">

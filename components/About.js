@@ -3,8 +3,10 @@
  * About the workshop: story, values, leadership, and key highlights.
  */
 
+import { useEffect, useRef, useState } from 'react';
 import { FaTools, FaShieldAlt, FaClock, FaHandshake } from 'react-icons/fa';
 import { SITE_DETAILS, TEAM_MEMBERS } from '../lib/siteDetails';
+import useScrollReveal from './useScrollReveal';
 
 const values = [
   {
@@ -36,6 +38,57 @@ const milestones = [
 ];
 
 export default function About() {
+  const sectionRef = useRef(null);
+  const photosRef = useRef(null);
+  const sequencePlayedRef = useRef(false);
+  const [photoReveal, setPhotoReveal] = useState({ owner: false, manager: false });
+
+  useScrollReveal(sectionRef);
+
+  useEffect(() => {
+    const target = photosRef.current;
+    if (!target) return undefined;
+
+    let ownerTimer;
+    let managerTimer;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting || sequencePlayedRef.current) return;
+
+          sequencePlayedRef.current = true;
+          const isDesktop = window.innerWidth >= 1024;
+
+          if (!isDesktop) {
+            setPhotoReveal({ owner: true, manager: true });
+            observer.unobserve(target);
+            return;
+          }
+
+          ownerTimer = window.setTimeout(() => {
+            setPhotoReveal((current) => ({ ...current, owner: true }));
+          }, 120);
+
+          managerTimer = window.setTimeout(() => {
+            setPhotoReveal({ owner: true, manager: true });
+          }, 2120);
+
+          observer.unobserve(target);
+        });
+      },
+      { threshold: 0.42, rootMargin: '0px 0px -10% 0px' }
+    );
+
+    observer.observe(target);
+
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(ownerTimer);
+      window.clearTimeout(managerTimer);
+    };
+  }, []);
+
   const badges = [
     `Started ${SITE_DETAILS.foundedDate}`,
     `Owner: ${SITE_DETAILS.owner.name}`,
@@ -50,7 +103,7 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="py-24 bg-[#111827] relative overflow-hidden">
+    <section id="about" ref={sectionRef} className="section-shell py-24 bg-[#111827] relative overflow-hidden">
       <div
         className="absolute right-0 top-0 w-1/3 h-full opacity-5"
         style={{ background: 'linear-gradient(to left, #F97316, transparent)' }}
@@ -58,7 +111,7 @@ export default function About() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
-          <div>
+          <div className="reveal reveal-left">
             <p className="font-condensed text-brand-orange tracking-[0.3em] uppercase text-sm mb-3">
               Our Story
             </p>
@@ -81,11 +134,14 @@ export default function About() {
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {values.map((value) => (
+              {values.map((value, index) => (
                 <div
                   key={value.title}
-                  className="glass-card rounded-xl p-4 flex items-start gap-3
-                             hover:border-brand-orange/30 transition-colors duration-300"
+                  className={`reveal glass-card rounded-xl p-4 flex items-start gap-3
+                             hover:border-brand-orange/30 transition-colors duration-300 ${
+                               index % 2 === 0 ? 'reveal-left' : 'reveal-right'
+                             }`}
+                  style={{ transitionDelay: `${index * 0.08}s` }}
                 >
                   <div className="w-10 h-10 bg-brand-orange/10 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
                     {value.icon}
@@ -103,10 +159,13 @@ export default function About() {
 
           <div className="space-y-8">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {stats.map((stat) => (
+              {stats.map((stat, index) => (
                 <div
                   key={stat.label}
-                  className="glass-card rounded-xl p-4 text-center border border-brand-orange/20"
+                  className={`reveal glass-card rounded-xl p-4 text-center border border-brand-orange/20 ${
+                    index === 0 ? 'reveal-left' : index === 1 ? 'reveal-up' : 'reveal-right'
+                  }`}
+                  style={{ transitionDelay: `${index * 0.08}s` }}
                 >
                   <p className="font-display text-3xl sm:text-4xl text-brand-orange">{stat.value}</p>
                   <p className="text-gray-400 text-sm uppercase tracking-wider">{stat.label}</p>
@@ -114,54 +173,66 @@ export default function About() {
               ))}
             </div>
 
-            <div className="grid sm:grid-cols-2 gap-4">
-              {TEAM_MEMBERS.map((member) => (
-                <article
-                  key={member.key}
-                  className="glass-card rounded-2xl overflow-hidden border border-[#2A3550]"
-                >
-                  <div className="aspect-[4/5] bg-[#0A0F1A]">
-                    <img
-                      src={member.photo}
-                      alt={`${member.name} - ${member.role}`}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="p-5">
-                    <p className="text-brand-orange text-xs font-condensed tracking-[0.3em] uppercase mb-2">
-                      {member.role}
-                    </p>
-                    <h3 className="font-display text-2xl text-white mb-3">{member.name}</h3>
-                    <div className="space-y-2">
-                      <a
-                        href={member.primaryHref}
-                        className="block text-center py-2.5 rounded-xl bg-brand-orange text-white text-sm font-condensed tracking-wider uppercase"
-                      >
-                        {member.primaryLabel}
-                      </a>
-                      <a
-                        href={member.secondaryHref}
-                        target={member.secondaryExternal ? '_blank' : undefined}
-                        rel={member.secondaryExternal ? 'noopener noreferrer' : undefined}
-                        className="block text-center py-2.5 rounded-xl border border-[#2A3550] text-gray-300 text-sm font-condensed tracking-wider uppercase hover:border-brand-orange hover:text-brand-orange transition-colors"
-                      >
-                        {member.secondaryLabel}
-                      </a>
+            <div ref={photosRef} data-about-photos className="grid sm:grid-cols-2 gap-4">
+              {TEAM_MEMBERS.map((member, index) => {
+                const isVisible = index === 0 ? photoReveal.owner : photoReveal.manager;
+
+                return (
+                  <article
+                    key={member.key}
+                    className={`about-photo-card ${index === 0 ? 'about-photo-left' : 'about-photo-right'} ${
+                      isVisible ? 'about-photo-visible' : ''
+                    } glass-card rounded-2xl overflow-hidden border border-[#2A3550]`}
+                  >
+                    <div className="aspect-[4/5] bg-[#0A0F1A]">
+                      <img
+                        src={member.photo}
+                        alt={`${member.name} - ${member.role}`}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
                     </div>
-                  </div>
-                </article>
-              ))}
+                    <div className="p-5">
+                      <p className="text-brand-orange text-xs font-condensed tracking-[0.3em] uppercase mb-2">
+                        {member.role}
+                      </p>
+                      <h3 className="font-display text-2xl text-white mb-3">{member.name}</h3>
+                      <div className="space-y-2">
+                        <a
+                          href={member.primaryHref}
+                          className="block text-center py-2.5 rounded-xl bg-brand-orange text-white text-sm font-condensed tracking-wider uppercase"
+                        >
+                          {member.primaryLabel}
+                        </a>
+                        <a
+                          href={member.secondaryHref}
+                          target={member.secondaryExternal ? '_blank' : undefined}
+                          rel={member.secondaryExternal ? 'noopener noreferrer' : undefined}
+                          className="block text-center py-2.5 rounded-xl border border-[#2A3550] text-gray-300 text-sm font-condensed tracking-wider uppercase hover:border-brand-orange hover:text-brand-orange transition-colors"
+                        >
+                          {member.secondaryLabel}
+                        </a>
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
 
-            <div className="glass-card rounded-2xl p-6">
+            <div className="reveal reveal-up glass-card rounded-2xl p-6">
               <h3 className="font-display text-2xl text-white mb-6 tracking-wide">OUR JOURNEY</h3>
               <div className="relative">
                 <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-brand-orange/20" />
 
                 <div className="space-y-6">
                   {milestones.map((milestone, index) => (
-                    <div key={milestone.year} className="flex items-start gap-4 pl-10 relative">
+                    <div
+                      key={milestone.year}
+                      className={`reveal flex items-start gap-4 pl-10 relative ${
+                        index % 2 === 0 ? 'reveal-left' : 'reveal-right'
+                      }`}
+                      style={{ transitionDelay: `${index * 0.1}s` }}
+                    >
                       <div
                         className={`absolute left-0 w-8 h-8 rounded-full
                                     flex items-center justify-center text-xs font-bold
@@ -185,12 +256,15 @@ export default function About() {
             </div>
 
             <div className="flex flex-wrap gap-3">
-              {badges.map((badge) => (
+              {badges.map((badge, index) => (
                 <span
                   key={badge}
-                  className="glass-card px-4 py-2 rounded-full text-sm
+                  className={`reveal glass-card px-4 py-2 rounded-full text-sm
                              text-gray-300 border border-[#2A3550]
-                             font-condensed tracking-wide"
+                             font-condensed tracking-wide ${
+                               index % 2 === 0 ? 'reveal-left' : 'reveal-right'
+                             }`}
+                  style={{ transitionDelay: `${index * 0.06}s` }}
                 >
                   + {badge}
                 </span>

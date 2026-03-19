@@ -12,7 +12,9 @@ import {
   FaShieldAlt,
   FaWhatsapp,
 } from 'react-icons/fa';
+import { useRef } from 'react';
 import { CONTACT_LINKS, GALLERY_IMAGES, SITE_DETAILS, TEAM_MEMBERS } from '../lib/siteDetails';
+import useScrollReveal from './useScrollReveal';
 
 const processSteps = [
   {
@@ -51,14 +53,17 @@ const promises = [
 ];
 
 export default function SignatureExperience() {
+  const sectionRef = useRef(null);
+  useScrollReveal(sectionRef);
+
   return (
-    <section className="section-shell relative overflow-hidden bg-[#111827] py-24">
+    <section ref={sectionRef} className="section-shell relative overflow-hidden bg-[#111827] py-24">
       <div className="absolute left-[-6rem] top-20 h-72 w-72 rounded-full bg-brand-orange/10 blur-3xl" />
       <div className="absolute right-[-4rem] bottom-0 h-80 w-80 rounded-full bg-brand-amber/10 blur-3xl" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-3xl">
+          <div className="reveal reveal-left max-w-3xl">
             <p className="font-condensed text-sm uppercase tracking-[0.3em] text-brand-orange">
               Signature Experience
             </p>
@@ -71,7 +76,7 @@ export default function SignatureExperience() {
             </p>
           </div>
 
-          <div className="panel-luxe max-w-md rounded-[1.6rem] px-5 py-4">
+          <div className="reveal reveal-right panel-luxe max-w-md rounded-[1.6rem] px-5 py-4">
             <p className="font-condensed text-[0.72rem] uppercase tracking-[0.28em] text-brand-orange">
               Designed For Conversion
             </p>
@@ -83,7 +88,7 @@ export default function SignatureExperience() {
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
-          <article className="panel-luxe relative overflow-hidden rounded-[2rem] p-3 sm:p-4">
+          <article className="reveal reveal-left panel-luxe relative overflow-hidden rounded-[2rem] p-3 sm:p-4">
             <div className="image-sheen relative overflow-hidden rounded-[1.6rem]">
               <img
                 src={GALLERY_IMAGES[1].src}
@@ -128,7 +133,7 @@ export default function SignatureExperience() {
           </article>
 
           <div className="grid gap-6">
-            <div className="panel-luxe rounded-[2rem] p-6">
+            <div className="reveal reveal-right panel-luxe rounded-[2rem] p-6">
               <p className="font-condensed text-[0.72rem] uppercase tracking-[0.28em] text-brand-orange">
                 Why This Feels Better
               </p>
@@ -151,7 +156,7 @@ export default function SignatureExperience() {
               </div>
             </div>
 
-            <div className="panel-luxe overflow-hidden rounded-[2rem]">
+            <div className="reveal reveal-up panel-luxe overflow-hidden rounded-[2rem]">
               <div className="grid sm:grid-cols-[0.84fr_1.16fr]">
                 <img
                   src={TEAM_MEMBERS[0].photo}
@@ -177,7 +182,7 @@ export default function SignatureExperience() {
               </div>
             </div>
 
-            <div className="panel-luxe rounded-[2rem] p-6">
+            <div className="reveal reveal-right panel-luxe rounded-[2rem] p-6">
               <p className="font-condensed text-[0.72rem] uppercase tracking-[0.28em] text-brand-orange">
                 Ready To Turn Visitors Into Customers?
               </p>

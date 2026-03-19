@@ -70,9 +70,11 @@ export default function Hero() {
             </div>
 
             <h1 className="hero-title-glow font-display text-6xl leading-[0.92] text-white sm:text-7xl lg:text-[7.5rem] xl:text-[8.5rem]">
-              SHIV
-              <br />
-              <span className="text-brand-orange">MOTORS</span>
+              <span className="hero-word hero-word-left block">SHIV</span>
+              <span className="hero-word hero-word-right block text-brand-orange">MOTORS</span>
+              <span className="hero-word hero-word-up block text-[0.36em] tracking-[0.34em] text-white/80 mt-3 sm:mt-4">
+                CHITAWA
+              </span>
             </h1>
 
             <p className="mt-6 max-w-xl text-base leading-relaxed text-gray-300 sm:text-lg">
